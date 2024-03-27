@@ -44,25 +44,44 @@ public class PaymentService {
 		paymentdao.savePay(pay);
 	};
 
-	public String cancelPay(int id) {
-		paymentdao.delete(id);
-		return "Payment cancelled successfully";
+
+
+	//public void cancelPay(int id) throws PaymentNotFound {
+
+	//	Payment pay = paymentrepo.findById(id)
+	//			.orElseThrow(() -> new PaymentNotFound("payment with id" + id + " not found"));
+	//	paymentrepo.delete(pay);
+
+	//}
+	
+	public void cancelPay(int id) throws PaymentNotFound {
+	    Optional<Payment> optionalPayment = paymentrepo.findById(id);
+	    
+	    if (optionalPayment.isPresent()) {
+	        Payment pay = optionalPayment.get();
+	        paymentrepo.delete(pay);
+	    } else {
+	        throw new PaymentNotFound("Payment with ID " + id + " not found");
+	    }
 	}
+	
+	
+	
+	
+	
+	
 
 	public Payment getPaymentbyid(int id) {
 
 		// return paymentrepo.findPaymentByPay_id(id);
-		 Optional<Payment> optionalPayment = paymentrepo.findById(id);
-		    if (optionalPayment.isPresent()) {
-		        return optionalPayment.get();
-		    } else {
-		        // Handle the case where the payment with the given ID is not found
-		        throw new PaymentNotFound("Payment not found for ID: " + id);
-		    }
+		Optional<Payment> optionalPayment = paymentrepo.findById(id);
+		if (optionalPayment.isPresent()) {
+			return optionalPayment.get();
+		} else {
+			// Handle the case where the payment with the given ID is not found
+			throw new PaymentNotFound("Payment not found for ID: " + id);
+		}
 
 	}
-	
-	
-	
 
 }

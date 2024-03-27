@@ -10,6 +10,8 @@ import java.util.List;
 public interface PaymentRepository extends JpaRepository<Payment, Integer>{
 
 	//Payment findPaymentByPay_id(int id);
+	//Payment findById(int id);
+	
 	
 	
 	

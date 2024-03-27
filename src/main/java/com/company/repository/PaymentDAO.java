@@ -1,5 +1,7 @@
 package com.company.repository;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -15,37 +17,24 @@ public class PaymentDAO {
 
 	@PersistenceContext
 	private EntityManager entityManager;
-	
-	@Autowired 
+
+	@Autowired
 	private PaymentRepository paymentrepo;
-	
-	
+
 	public void savePay(Payment pay) {
-		
-		
+
 		entityManager.persist(pay);
-		
-		
+
 	}
-	
-	
-	public void delete(int id) 
-	{
-		
-		
-	//	Payment pay= paymentrepo.findPaymentByPay_id(id);
-		
-		//entityManager.remove(pay);
-		
-		
-		
-		
-		
+
+	public void delete(int id) {
+
+		// Payment pay= paymentrepo.findPaymentByPay_id(id);
+
+		//Payment pay = paymentrepo.findById(id);
+
+	//	entityManager.remove(pay);
+
 	}
 
 }
-
-
-
-
-
